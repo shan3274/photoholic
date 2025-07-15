@@ -41,7 +41,11 @@ export default function Header() {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <Link href="/" className="text-xl font-light minimal-text">
-            <span className={`transition-colors ${isScrolled ? 'text-foreground' : 'text-white drop-shadow-lg'}`}>
+            <span className={`transition-colors ${
+              pathname === '/' && !isScrolled
+                ? 'text-white drop-shadow-lg'
+                : 'text-foreground'
+            }`}>
               Alex Rivera
             </span>
           </Link>
@@ -53,13 +57,13 @@ export default function Header() {
                 key={item.name}
                 href={item.href}
                 className={`text-sm font-light minimal-text transition-colors hover:opacity-70 ${
-                  pathname === item.href
-                    ? isScrolled
-                      ? 'text-foreground'
-                      : 'text-white drop-shadow-lg'
-                    : isScrolled
-                    ? 'text-muted-foreground'
-                    : 'text-white/80 drop-shadow-lg'
+                  pathname === '/' && !isScrolled
+                    ? pathname === item.href
+                      ? 'text-white drop-shadow-lg'
+                      : 'text-white/80 drop-shadow-lg'
+                    : pathname === item.href
+                    ? 'text-foreground'
+                    : 'text-muted-foreground'
                 }`}
               >
                 {item.name}
